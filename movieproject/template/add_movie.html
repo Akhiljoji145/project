@@ -1,0 +1,69 @@
+{% extends 'home.html' %}
+{% block content %}
+<style>
+.padding
+{
+    padding: 10px;
+}
+</style>
+<div class="container">    
+    <form class="row" method='POST' enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="col-sm-6 padding">
+            <label>Movie Name:</label>
+        </div>
+        <div class="col-sm-6 padding">
+            <input type="text" class="form-control" name="name" required>
+        </div>
+        <div class="col-sm-6 padding">
+            <label>image:</label>
+        </div>
+        <div class="col-sm-6 padding">
+            <input type="file" class="form-control" name="img" accept="image/*" required>
+        </div>
+        <div class="col-sm-6 padding">
+            <label>trailer link:</label>
+        </div>
+        <div class="col-sm-6 padding">
+            <input type="text" class="form-control" name="trailer" required>
+        </div>
+        <div class="col-sm-6 padding">
+            <label>banner:</label>
+        </div>
+        <div class="col-sm-6 padding">
+            <input type="file" class="form-control" name="banner" accept="image/*" required>
+        </div>
+        <div class="col-sm-6 padding">
+            <label>description:</label>
+        </div>
+        <div class="col-sm-6 ">
+            <textarea cols="59px" rows="10px" name="desc" required></textarea>
+        </div>
+        <div class="col-sm-6 padding">
+            <label>Category:</label>
+        </div>
+        <div class="col-sm-6 ">
+            <select name="category">
+                {% for i in category %}
+                <option value="{{i.id}}">{{i.genre}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-sm-6 padding">
+            <label>release date:</label>
+        </div>
+        <div class="col-sm-6 ">
+            <input type="date" class="form-control" name="date" required>
+        </div>
+        <div class="col-sm-6 padding">
+            <label>user:</label>
+        </div>
+        <div class="col-sm-6 padding">
+            <input type="text" name="user" value="{{user.username}}" class="form-control" readonly>
+        </div>
+        <div lass="col-sm-12">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% load static %}
+<style type="text/css">
+  .nav-button
+  {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .btn-padding
+  {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  .dropdown-item:hover
+  {
+      background-color:#656565;
+      color:white;
+  }
+</style>
+<nav class="navbar navbar-expand-lg navbar-bg navbar-dark" style="margin-bottom:30px;">
+  <a class="nav-item" href="{% url 'movie:home' %}">
+    <img src="{% static 'images/logo.jpg' %}" height="110px" width="110px">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      {% if user.is_authenticated %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'movie:userhome' user.id %}">Movies</a>
+      </li>
+      {% else %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'movie:home' %}">Movies</a>
+      </li>
+      {% endif %}
+      <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Categories
+      </a>
+      <div class="dropdown-menu drop-font" style="background-color:#2E2E2E;" aria-labelledby="navbarDropdown">
+        {% for i in category %}
+        <a class="dropdown-item" style="color:white" href="{% url 'movie:category' i.id %}">{{i.genre}}</a>
+        {% endfor %}
+      </div>
+      </li>
+
+    </ul>
+    {% if user.is_authenticated %}
+    <li class="navbar-text">
+        <a class="nav-link" href="{% url 'movie:userdetails' user.id %}">{{ user.username }}</a>
+    </li>
+    <li class="navbar-text">
+    <a class="nav-link btn btn-danger" href="{% url 'movie:logout' %}">Logout</a>
+    </li>
+    {% else %}
+    <li class="navbar-text nav-button">
+        <a class="nav-link btn btn-success" href="{% url 'movie:register' %}">Register</a>
+    </li>
+    <li class="navbar-text nav-button">
+        <a class="nav-link btn btn-success" href="{% url 'movie:login' %}"><i class="fa-solid fa-right-to-bracket"></i></a>
+    </li>
+    {% endif %}
+  </div>
+</nav>
+<div class="container" style="padding:0;margin-top:-20px;">
+{% if user.is_authenticated %}
+<div class="d-flex justify-content-center justify-content-lg-end">
+<a class="btn btn-warning btn-padding " href="{% url 'add:addmovie' user.id %}"><i class="fa-solid fa-plus"></i> Add Movie</a>
+</div>
+{% else %}
+{% endif %}
+</div>

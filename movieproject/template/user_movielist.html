@@ -1,0 +1,64 @@
+{% extends 'home.html' %}
+{% block content %}
+<div class="container" style="padding-top: 10px;padding-bottom: 10px;">
+	<div class="row mx_auto">
+		<div class="col-sm-12 col-md-12 col-lg-12">
+		<h4>User Added Movies</h4>
+		</div>
+		
+		
+		{% for i in movie %}
+		{% if user.username == i.user %}
+		<div class="col-9 col-sm-6 col-md-6 col-lg-4">
+		
+		<div class="card" style="width: 18rem;height:100%;margin-bottom:10px;">
+  			<a class="mov_link" style="color:white;" href="{% url 'movie:usermoviedetail' user.id i.id %}">
+  				<img class="card-img-top" style="height:300px;width:100%" src="{{i.image.url}}"></a>
+  			<div class="card-body" style="height:110px">
+    		<h5 class="card-title text-center">{{i.name}}</h5>
+			</div>
+    	</div>
+    </div>
+    	{% else %}
+    	{% endif %}
+    	{% endfor %}
+       
+
+</div>
+</div>
+
+<div class="container">
+	<div class="row mx_auto">
+		<div class="col-sm-12 col-md-12 col-lg-12">
+		<h4>All Movies</h4>
+		</div>
+		{% for i in movie %}
+		<div class="col-9 col-sm-6 col-md-6 col-lg-4">
+		<div style="margin-top:10px;">
+		<div class="card" style="width:18rem;height:100%;">
+  			<a class="mov_link" style="color:white;" href="{% url 'movie:usermoviedetail' user.id i.id %}">
+  				<img class="card-img-top" style="height:300px;width:100%" src="{{i.image.url}}"></a>
+  			<div class="card-body" style="height:110px">
+    		<h5 class="card-title text-center">{{i.name}}</h5>
+  			</div>
+		</div>
+		</div>
+		</div>
+		{% endfor %}
+
+	</div>
+</div>
+		<div class="mx_auto">
+		{% if movie.paginator.num_pages > 1 %}
+
+		<hr>
+		<div class="text-center paginator">
+		{% for pg in movie.paginator.page_range %}
+		<a href="?page={{pg}}" class="btn btn-light btn-sm {% if movie.number == pg %} active {% endif %}">
+		{{pg}}
+		</a>
+		{% endfor %}
+		</div>
+		{% endif %}
+	</div>
+{% endblock %}

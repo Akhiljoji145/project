@@ -1,0 +1,25 @@
+.navbar-bg
+{
+	background-color: #1A1A1A;
+}
+.banner
+{
+	padding-bottom: 10px;
+}
+.para
+{
+	font-size: 18px;
+	padding-top: 40px;
+}
+.heading
+{
+	margin:20px 0px 20px 0px;
+}
+.card
+{
+	background-color: #1A1A1A;
+}
+.mov_link:hover
+{
+	text-decoration: none;
+}
