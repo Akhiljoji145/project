@@ -3,3 +3,4 @@ Pillow
 djongo
 pymongo
 pytz>=2024.1
+pymongo[srv]
